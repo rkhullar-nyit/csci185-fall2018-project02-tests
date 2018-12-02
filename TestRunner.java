@@ -1,3 +1,4 @@
+import org.junit.runner.Description;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -7,18 +8,22 @@ import java.util.HashMap;
 class TestRunner
 {
 
-    private static final int max = 5, min = 2;
+    private static final int max = 10, min = 1;
     private static final HashMap<String, Integer> penalties = new HashMap<>();
 
     static
     {
-        penalties.put("test_main", 5);
+        penalties.put("test_node_data", 1);
+        penalties.put("test_node_next", 1);
+        penalties.put("test_node_prev", 1);
+        penalties.put("test_node_to_string", 1);
+        penalties.put("test_list_to_string", 2);
     }
 
     public static void main(String[] args)
     {
-        Result calculator_result = JUnitCore.runClasses(ExampleTest.class);
-        Result[] results = new Result[]{calculator_result};
+        Result linked_list_result = JUnitCore.runClasses(LinkedListTest.class);
+        Result[] results = new Result[]{linked_list_result};
 
         int grade = max;
 
@@ -26,9 +31,14 @@ class TestRunner
         {
             for (Failure failure : result.getFailures())
             {
-                String name = failure.getTestHeader().split("[(]")[0];
-                System.err.printf("failed test: %s\n", name);
-                grade -= penalties.get(name);
+                Description description = failure.getDescription();
+                String class_name = description.getClassName();
+                String method_name = description.getMethodName();
+                String message = failure.getMessage();
+
+                System.err.printf("failed test %s.%s\n\t%s\n", class_name, method_name, message);
+
+                grade -= penalties.get(method_name.split("[\\[]")[0]);
             }
         }
 
