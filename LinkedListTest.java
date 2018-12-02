@@ -153,4 +153,28 @@ public class LinkedListTest
         assertEquals(Arrays.toString(expected), Arrays.toString(actual));
     }
 
+    @Test
+    public void test_list_del_head() throws NoSuchFieldException, IllegalAccessException
+    {
+        LinkedList list = build_list('a', 'b', 'c');
+        Character item = (Character) list.delHead();
+        assertEquals(Character.valueOf('a'), item);
+
+        Character expected[] = new Character[] {'b', 'c'};
+        Object[] actual = list_to_array(list);
+        assertEquals(Arrays.toString(expected), Arrays.toString(actual));
+    }
+
+    @Test
+    public void test_list_del_tail() throws NoSuchFieldException, IllegalAccessException
+    {
+        LinkedList list = build_list('a', 'b', 'c');
+        Character item = (Character) list.delTail();
+        assertEquals(Character.valueOf('c'), item);
+
+        Character expected[] = new Character[] {'a', 'b'};
+        Object[] actual = list_to_array(list);
+        assertEquals(Arrays.toString(expected), Arrays.toString(actual));
+    }
+
 }

@@ -18,6 +18,10 @@ class TestRunner
         penalties.put("test_node_prev", 1);
         penalties.put("test_node_to_string", 1);
         penalties.put("test_list_to_string", 2);
+        penalties.put("test_list_add_head", 2);
+        penalties.put("test_list_add_tail", 2);
+        penalties.put("test_list_del_head", 2);
+        penalties.put("test_list_del_tail", 2);
     }
 
     public static void main(String[] args)
