@@ -8,7 +8,7 @@ import java.util.HashMap;
 class TestRunner
 {
 
-    private static final int max = 10, min = 1;
+    private static final int max = 15, min = 2;
     private static final HashMap<String, Integer> penalties = new HashMap<>();
 
     static
